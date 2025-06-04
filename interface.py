@@ -31,3 +31,15 @@ def print_schedule(schedule):
         mark = lesson.get("mark", "")
         mark_str = f" | Оценка: {mark}" if mark is not None else ""
         print(f"{date} | Пара: {lesson_num} | {start}-{end} | {subject} | Преподаватель: {teacher} | Аудитория: {room}{mark_str}")
+
+def print_homework(homework):
+    if not homework or "data" not in homework or not homework["data"]:
+        print("Нет домашних заданий.")
+        return
+    data = homework["data"]
+    print(f"Всего домашних заданий: {len(data)}")
+    for hw in data:
+        title = hw.get("theme", "Без названия")
+        date_created = hw.get("creation_time", "неизвестно")
+        deadline = hw.get("overdue_time", "неизвестно")
+        print(f"- {title} | Дата выдачи: {date_created} | Дедлайн: {deadline}")
