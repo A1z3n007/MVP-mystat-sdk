@@ -101,3 +101,24 @@ def middlemark():
     if not mark_values:
         return 0
     return sum(mark_values) / len(mark_values)
+
+def get_homework():
+    token = get_token()
+    if not token:
+        print("Токен недействителен, требуется повторная авторизация.")
+        return None
+    url = "https://mapi.itstep.org/v1/mystat/aqtobe/homework/list?status=3&limit=60&sort=-hw.time"
+    headers = {
+        "Authorization": f"Bearer {token}"
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        try:
+            return response.json()
+        except Exception:
+            print("Ошибка при разборе ответа сервера!")
+            print("Текст ответа:", response.text)
+            return None
+    else:
+        print(f"Ошибка получения домашних заданий: {response.status_code} — {response.text}")
+        return None
