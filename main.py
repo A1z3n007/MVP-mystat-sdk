@@ -1,5 +1,5 @@
-from core import get_auth, get_marks, get_schedule_week, get_schedule_month, middlemark
-from interface import get_user_credentials, print_marks, print_schedule
+from core import get_auth, get_marks, get_schedule_week, get_schedule_month, middlemark, get_homework
+from interface import get_user_credentials, print_marks, print_schedule, print_homework
 
 DEFAULT_LOGIN = "Kovla_ea99"
 DEFAULT_PASSWORD = "sb8yLe5@"
@@ -29,6 +29,10 @@ def main():
         print("------")
         print("Расписание на месяц:")
         print_schedule(schedule_month)
+        print("------")
+        print("Домашние задания:")
+        homework = get_homework()
+        print_homework(homework)
     else:
         print("Ошибка аутентификации. Проверьте логин и пароль.")
 
